@@ -25,9 +25,9 @@ function App() {
         </h1>
       </section>
 
-      <section id="work" className="flex items-center justify-center h-screen w-full bg-neutral-950 border-b border-white/10">
+      <section id="exp" className="flex items-center justify-center h-screen w-full bg-neutral-950 border-b border-white/10">
         <h1 className="text-8xl font-bold uppercase tracking-tighter text-white">
-          Work
+          Experience
         </h1>
       </section>
 
