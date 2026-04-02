@@ -140,7 +140,7 @@ const Navbar = () => {
                 <a
                   key={index}
                   href={social.href}
-                  className="leading-loose tracking-widest uppercase hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.8)] transition-all duration-300"
+                  className="leading-loose tracking-widest lowercase hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.8)] transition-all duration-300"
                 >
                   {"{ "}
                   {social.name}
