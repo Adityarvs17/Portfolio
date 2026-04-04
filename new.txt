@@ -1,0 +1,13 @@
+Implementation Details:
+
+1. Navbar should be changed from circle menu to flat horizontal one.
+
+2. Lanyard Issues should be fixed
+
+3. Dark and Light theme backgrounds need to be fixed
+
+4. About section theme needs to be fixed
+
+5. CP section needs seperate file and idea. 
+
+6. Need to add smooth animations.
