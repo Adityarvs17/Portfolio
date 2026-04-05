@@ -1,7 +1,5 @@
 Implementation Details:
 
-1. Navbar should be changed from circle menu to flat horizontal one.
-
 2. Lanyard Issues should be fixed
 
 3. Dark and Light theme backgrounds need to be fixed
