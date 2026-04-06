@@ -9,3 +9,5 @@ Implementation Details:
 5. CP section needs seperate file and idea. 
 
 6. Need to add smooth animations.
+
+Need to work on this before this weekend
