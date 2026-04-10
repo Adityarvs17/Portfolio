@@ -1,4 +1,5 @@
 Implementation Details:
+1. Reconstruct the home page, once for all.
 
 2. Lanyard Issues should be fixed
 
