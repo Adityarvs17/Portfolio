@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* --- 1. SPACING FROM HERO SECTION --- */
+.about-section {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 2rem;
+  margin-top: 6rem; /* Gives plenty of space below your hero section */
+  width: 100%;
+  z-index: 10;
+  position: relative;
+}
+
+/* --- 2. MASTER TERMINAL & NUCLEAR FONT RESET --- */
+.master-terminal {
+  width: 100%;
+  max-width: 900px;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 122, 204, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Force standard text behavior inside the terminal to stop Tailwind interference */
+.master-terminal * {
+  letter-spacing: 0px !important;
+  text-transform: none !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+}
+
+/* --- HEADER & TABS --- */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  background-color: #2d2d2d;
+  padding: 0 15px;
+  border-bottom: 1px solid #1e1e1e;
+  height: 45px;
+}
+
+.mac-dots { display: flex; gap: 8px; margin-right: 30px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot.red { background-color: #ff5f56; }
+.dot.yellow { background-color: #ffbd2e; }
+.dot.green { background-color: #27c93f; }
+
+.terminal-tabs { display: flex; height: 100%; }
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: #858585;
+  font-size: 0.9rem;
+  padding: 0 20px;
+  cursor: pointer;
+  height: 100%;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+.tab-btn:hover { color: #d4d4d4; background: rgba(255, 255, 255, 0.05); }
+.tab-btn.active { color: #569cd6; background: #1e1e1e; border-bottom: 2px solid #569cd6; }
+
+/* --- 3. FIXED HEIGHT TERMINAL BODY --- */
+.terminal-body {
+  padding: 30px;
+  color: #9cdcfe;
+  font-size: 1.1rem;
+  line-height: 1.6 !important;
+  height: 380px; /* LOCKS THE HEIGHT */
+  overflow-y: auto; /* Allows scrolling inside if content gets too long */
+  text-align: left;
+}
+
+.terminal-body pre, .terminal-body code { white-space: pre-wrap; }
+.clearing-text { color: #858585; font-style: italic; }
+.cursor { animation: blink 1s step-end infinite; color: #007acc; font-weight: bold; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* --- TECH STACK GRID --- */
+.system-msg { color: #4ec9b0; margin-bottom: 20px; font-size: 0.95rem; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; }
+.tech-tag {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ce9178;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  animation: popIn 0.4s forwards;
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: translateY(10px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- ASCII METRICS TABLE --- */
+.ascii-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.table-row { display: grid; grid-template-columns: 2fr 2fr 1fr; }
+.table-row.header { color: #858585; border-bottom: 1px dashed #858585; padding-bottom: 10px; margin-bottom: 10px;}
+.table-divider { color: #858585; letter-spacing: 2px !important; margin: 10px 0; }
+
+.leetcode-row { color: #ce9178; }
+.leetcode-row .highlight { color: #ffa116; font-weight: bold; }
+.codechef-row { color: #dcdcaa; }
+.codechef-row .highlight { color: #8b5a2b; font-weight: bold; }
+.cursor-line { color: #d4d4d4; margin-top: 10px; }
+
+/* --- FOOTER STATUS BAR --- */
+.terminal-footer {
+  display: flex;
+  align-items: center;
+  background-color: #007acc;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 0.8rem;
+  gap: 10px;
+}
+.status-indicator {
+  width: 8px; height: 8px; border-radius: 50%; background-color: #fff;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+.divider { opacity: 0.5; }
