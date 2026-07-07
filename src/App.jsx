@@ -1,20 +1,11 @@
-import PillNav from './Sections/Navbar';
-import Hero from "./Sections/Hero"
-import About from "./Sections/About"
-import DualLanyard from "./Components/orb/DualLanyard"
 import { useState, useEffect } from "react"
-
-// 1. MOVE THIS OUTSIDE THE COMPONENT! 
-// Now its memory reference never changes, preventing GSAP from rebuilding on scroll.
-const NAV_ITEMS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Work', href: '#work' },
-  { label: 'Contact', href: '#contact' }
-];
-
+import Navbar from './Sections/Navbar'; // Adjust import path if needed
+import Hero from "./Sections/Hero"
+import Profile from "./Sections/Profile"
+import Projects from "./Sections/Projects"
+import Contact from "./Sections/Contact"
 function App() {
-  const [theme, setTheme] = useState("dark");
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState('#home');
 
   useEffect(() => {
@@ -40,43 +31,25 @@ function App() {
   }, []);
 
   return (
-    <main className="relative bg-black h-full w-full">
-      <div className="bg-grain"></div>
-      <div className="absolute inset-0 bg-grid z-0"></div>
-
-      <PillNav 
-        items={NAV_ITEMS} // 2. PASS THE STABLE ARRAY HERE
-        activeHref={activeSection} 
-        baseColor="#000000"
-        pillColor="#ffffff"
-        hoverCircleColor="#6366f1"
-      />
-
-      <DualLanyard 
-        onToggleLight={() => setTheme("light")} 
-        onToggleDark={() => setTheme("dark")} 
-      />
+    <main className={`relative h-full w-full transition-colors duration-1000 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+      
+      {/* GLOBAL NAVBAR HUD */}
+      <Navbar isDarkMode={isDarkMode} activeSection={activeSection} />
 
       <section id="home" className="min-h-screen">
-        <Hero theme={theme} />
+        <Hero isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       </section>
 
-      <section id="about" className="flex items-center justify-center h-screen w-full border-b border-white/10">
-        <h1 className="text-8xl font-bold uppercase tracking-tighter text-white">
-          <About />
-        </h1>
+      <section id="about" className="w-full border-b border-white/10 relative z-10">
+        <Profile isDarkMode={isDarkMode} />
       </section>
 
-      <section id="work" className="flex items-center justify-center h-screen w-full bg-neutral-950 border-b border-white/10">
-        <h1 className="text-8xl font-bold uppercase tracking-tighter text-white">
-          Work
-        </h1>
+      <section id="work" className={`w-full border-b transition-colors duration-1000 ${isDarkMode ? 'bg-[#050505] border-white/10 text-white' : 'bg-[#fafafa] border-black/10 text-slate-900'}`}>
+        <Projects isDarkMode={isDarkMode} />
       </section>
 
-      <section id="contact" className="flex items-center justify-center h-screen w-full border-b border-white/10">
-        <h1 className="text-8xl font-bold uppercase tracking-tighter text-white">
-          Contact
-        </h1>
+      <section id="contact" className={`flex items-center justify-center h-screen w-full transition-colors duration-1000 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+        <Contact isDarkMode={isDarkMode} />
       </section>
     </main>
   );

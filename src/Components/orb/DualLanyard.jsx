@@ -10,7 +10,7 @@ import lanyardTexture from '../../assets/lanyard/lanyard.png';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-export default function DualLanyard({ onToggleLight, onToggleDark }) {
+export default function RightLanyard({ onToggle }) {
   const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
@@ -31,14 +31,10 @@ export default function DualLanyard({ onToggleLight, onToggleDark }) {
       >
         <ambientLight intensity={Math.PI} />
         <Physics gravity={[0, -40, 0]} timeStep={1 / 60}>
-          <Band 
-            position={isMobile ? [-2, 0, 0] : [-6, 0, 0]} 
-            onPull={onToggleLight} 
-            isMobile={isMobile}
-          />
+          {/* Kept only the right-side Band with positive X coordinates */}
           <Band 
             position={isMobile ? [2, 0, 0] : [6, 0, 0]} 
-            onPull={onToggleDark} 
+            onPull={onToggle} 
             isMobile={isMobile}
           />
         </Physics>
@@ -51,7 +47,7 @@ export default function DualLanyard({ onToggleLight, onToggleDark }) {
   );
 }
 
-function Band({ maxSpeed = 50, minSpeed = 0, isMobile, position, onPull }) {
+function Band({ maxSpeed = 50, minSpeed = 0, position, onPull }) {
   const band = useRef(), fixed = useRef(), j1 = useRef(), j2 = useRef(), j3 = useRef(), card = useRef();
   const vec = new THREE.Vector3(), dir = new THREE.Vector3(); 
   
@@ -77,13 +73,14 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile, position, onPull }) {
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
   useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.45, 0]]);
 
- const originalTexture = useTexture(lanyardTexture);
+  const originalTexture = useTexture(lanyardTexture);
   const texture = useMemo(() => {
     const cloned = originalTexture.clone();
     cloned.wrapS = cloned.wrapT = THREE.RepeatWrapping;
     cloned.needsUpdate = true;
     return cloned;
   }, [originalTexture]);
+
   useEffect(() => {
     if (hovered) {
       document.body.style.cursor = dragged ? 'grabbing' : 'grab';
@@ -125,8 +122,6 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile, position, onPull }) {
       card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
     }
   });
-
-  // 3. REMOVED: The two lines that were crashing the linter are gone from here.
 
   return (
     <group position={position || [0, 0, 0]}>
